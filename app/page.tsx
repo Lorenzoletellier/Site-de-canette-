@@ -109,9 +109,7 @@ export default function Home() {
                 style={{ backgroundColor: `${f.color}26` }}
               >
                 <Can
-                  name={f.name}
-                  color={f.color}
-                  accent={f.accent}
+                  {...f}
                   className="h-36 shrink-0 drop-shadow-xl transition duration-500 group-hover:-rotate-6"
                 />
                 <div>
@@ -148,9 +146,7 @@ export default function Home() {
               return (
                 <Can
                   key={id}
-                  name={f.name}
-                  color={f.color}
-                  accent={f.accent}
+                  {...f}
                   className={`drop-shadow-2xl ${i === 1 ? "h-56" : "h-44"}`}
                 />
               );

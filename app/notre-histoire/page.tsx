@@ -124,6 +124,8 @@ export default function NotreHistoirePage() {
                     name={f.name}
                     color={f.color}
                     accent={f.accent}
+                    secondary={f.secondary}
+                    pattern={f.pattern}
                     className={`h-40 drop-shadow-xl ${left ? "rotate-6" : "-rotate-6"}`}
                   />
                 </div>

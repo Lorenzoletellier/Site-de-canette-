@@ -1,3 +1,15 @@
+// Motif imprimé sur la canette
+export type Pattern =
+  | "sunburst"
+  | "dots"
+  | "waves"
+  | "stripes"
+  | "rings"
+  | "bubbles"
+  | "split"
+  | "zigzag"
+  | "checker";
+
 export type Family = "fraiches" | "fruitees" | "gourmandes";
 
 export const families: { id: Family; label: string }[] = [
@@ -19,6 +31,8 @@ export type Flavor = {
   price: number;
   color: string;
   accent: string;
+  secondary: string;
+  pattern: Pattern;
   kcal: number;
 };
 
@@ -36,6 +50,8 @@ export const flavors: Flavor[] = [
     price: 2.5,
     color: "#f5c518",
     accent: "#1f2a1a",
+    secondary: "#fff3a3",
+    pattern: "sunburst",
     kcal: 18,
   },
   {
@@ -51,6 +67,8 @@ export const flavors: Flavor[] = [
     price: 2.8,
     color: "#e63e6d",
     accent: "#fff4f6",
+    secondary: "#ffb3c7",
+    pattern: "dots",
     kcal: 22,
   },
   {
@@ -66,6 +84,8 @@ export const flavors: Flavor[] = [
     price: 2.8,
     color: "#ff8a3d",
     accent: "#2b1406",
+    secondary: "#ffd2a8",
+    pattern: "waves",
     kcal: 24,
   },
   {
@@ -81,6 +101,8 @@ export const flavors: Flavor[] = [
     price: 2.5,
     color: "#3fbf7f",
     accent: "#06200f",
+    secondary: "#c4f5d9",
+    pattern: "stripes",
     kcal: 12,
   },
   {
@@ -96,6 +118,8 @@ export const flavors: Flavor[] = [
     price: 3,
     color: "#5b2a1c",
     accent: "#fbe9d8",
+    secondary: "#c98a5a",
+    pattern: "rings",
     kcal: 30,
   },
   {
@@ -111,6 +135,8 @@ export const flavors: Flavor[] = [
     price: 3,
     color: "#5a4fcf",
     accent: "#f1efff",
+    secondary: "#b7b0ff",
+    pattern: "bubbles",
     kcal: 20,
   },
   {
@@ -126,6 +152,8 @@ export const flavors: Flavor[] = [
     price: 2.8,
     color: "#ff5a5f",
     accent: "#1e3d14",
+    secondary: "#3fa34d",
+    pattern: "split",
     kcal: 19,
   },
   {
@@ -141,6 +169,8 @@ export const flavors: Flavor[] = [
     price: 3,
     color: "#2ec4b6",
     accent: "#0b2b28",
+    secondary: "#ffe08a",
+    pattern: "zigzag",
     kcal: 26,
   },
   {
@@ -156,6 +186,8 @@ export const flavors: Flavor[] = [
     price: 2.8,
     color: "#c0392b",
     accent: "#fff3e6",
+    secondary: "#ff7a6b",
+    pattern: "checker",
     kcal: 25,
   },
 ];

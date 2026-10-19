@@ -49,6 +49,8 @@ export default function ProductModal({ flavor, onClose, onAdd }: Props) {
             name={flavor.name}
             color={flavor.color}
             accent={flavor.accent}
+            secondary={flavor.secondary}
+            pattern={flavor.pattern}
             className="float h-64 drop-shadow-2xl md:h-80"
           />
         </div>
