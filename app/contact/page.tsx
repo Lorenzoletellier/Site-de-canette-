@@ -16,8 +16,8 @@ const faq = [
 export default function ContactPage() {
   return (
     <main className="flex-1">
+      <SiteHeader />
       <div className="bg-sun">
-        <SiteHeader />
         <div className="mx-auto max-w-6xl px-4 pt-8 pb-20 sm:px-6">
           <p className="text-sm font-semibold tracking-[0.2em] text-ink/60 uppercase">Contact</p>
           <h1 className="font-display mt-2 max-w-2xl text-5xl leading-[0.95] font-extrabold sm:text-6xl">

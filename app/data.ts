@@ -1,5 +1,14 @@
+export type Family = "fraiches" | "fruitees" | "gourmandes";
+
+export const families: { id: Family; label: string }[] = [
+  { id: "fraiches", label: "Fraîches" },
+  { id: "fruitees", label: "Fruitées" },
+  { id: "gourmandes", label: "Gourmandes" },
+];
+
 export type Flavor = {
   id: string;
+  family: Family;
   name: string;
   tagline: string;
   description: string;
@@ -16,6 +25,7 @@ export type Flavor = {
 export const flavors: Flavor[] = [
   {
     id: "citron-yuzu",
+    family: "fraiches",
     name: "Citron Yuzu",
     tagline: "Acidulé & solaire",
     description: "Citron jaune pressé, une pointe de yuzu japonais et des bulles fines.",
@@ -30,6 +40,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "framboise-basilic",
+    family: "fruitees",
     name: "Framboise Basilic",
     tagline: "Fruité & herbacé",
     description: "Framboises de France rehaussées d'un basilic frais du jardin.",
@@ -44,6 +55,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "peche-gingembre",
+    family: "fruitees",
     name: "Pêche Gingembre",
     tagline: "Doux & piquant",
     description: "Pêche blanche juteuse et gingembre râpé pour un final qui réveille.",
@@ -58,6 +70,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "concombre-menthe",
+    family: "fraiches",
     name: "Concombre Menthe",
     tagline: "Frais & léger",
     description: "Concombre croquant et menthe poivrée, le rafraîchissement absolu.",
@@ -72,6 +85,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "cola-vanille",
+    family: "gourmandes",
     name: "Cola Vanille",
     tagline: "Classique revisité",
     description: "Un cola artisanal aux épices douces et à la vanille de Madagascar.",
@@ -86,6 +100,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "myrtille-lavande",
+    family: "fruitees",
     name: "Myrtille Lavande",
     tagline: "Floral & intense",
     description: "Myrtilles sauvages et lavande de Provence, tout en délicatesse.",
@@ -100,6 +115,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "pasteque-hibiscus",
+    family: "fruitees",
     name: "Pastèque Hibiscus",
     tagline: "Juteux & acidulé",
     description: "Pastèque gorgée de soleil et fleur d'hibiscus pour une touche acidulée.",
@@ -114,6 +130,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "ananas-coco",
+    family: "gourmandes",
     name: "Ananas Coco",
     tagline: "Tropical & crémeux",
     description: "Ananas rôti et eau de coco, un aller simple pour les tropiques.",
@@ -128,6 +145,7 @@ export const flavors: Flavor[] = [
   },
   {
     id: "pomme-cannelle",
+    family: "gourmandes",
     name: "Pomme Cannelle",
     tagline: "Gourmand & réconfortant",
     description: "Pomme normande et cannelle douce, comme une tarte dans une canette.",

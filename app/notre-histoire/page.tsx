@@ -74,8 +74,8 @@ export default function NotreHistoirePage() {
   return (
     <main className="flex-1">
       {/* Intro */}
+      <SiteHeader />
       <section className="bg-sun">
-        <SiteHeader />
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pt-8 pb-24 sm:px-6 md:grid-cols-2">
           <div>
             <p className="text-sm font-semibold tracking-[0.2em] text-ink/60 uppercase">Notre histoire</p>

@@ -11,9 +11,7 @@ export const metadata: Metadata = {
 export default function SaveursPage() {
   return (
     <main className="flex-1">
-      <div className="bg-sun">
-        <SiteHeader />
-      </div>
+      <SiteHeader />
       <Shop />
       <SiteFooter />
     </main>

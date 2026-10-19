@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Can from "./Can";
 import ProductModal from "./ProductModal";
-import { flavors, formatPrice, type Flavor } from "../data";
+import { families, flavors, formatPrice, type Family, type Flavor } from "../data";
 
 type Cart = Record<string, number>;
 
@@ -11,6 +11,8 @@ export default function Shop() {
   const [cart, setCart] = useState<Cart>({});
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Flavor | null>(null);
+  const [filter, setFilter] = useState<Family | "toutes">("toutes");
+  const shown = filter === "toutes" ? flavors : flavors.filter((f) => f.family === filter);
 
   const items = useMemo(
     () =>
@@ -35,7 +37,7 @@ export default function Shop() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-5 right-5 z-40 flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-cream shadow-lg transition hover:scale-105"
+        className="fixed right-4 bottom-4 z-40 sm:top-3 sm:bottom-auto flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-cream shadow-lg transition hover:scale-105 sm:right-6"
         aria-label={`Ouvrir le panier (${count} article${count > 1 ? "s" : ""})`}
       >
         Panier
@@ -44,13 +46,35 @@ export default function Shop() {
         </span>
       </button>
 
-      <section id="saveurs" className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+      <section id="saveurs" className="mx-auto max-w-6xl px-4 pt-16 pb-24 sm:px-6">
         <p className="text-sm font-semibold tracking-[0.2em] text-ink/60 uppercase">La gamme</p>
-        <h2 className="font-display mt-2 text-4xl font-extrabold sm:text-5xl">Neuf saveurs, zéro compromis.</h2>
-        <p className="mt-3 text-ink/60">Clique sur une canette pour découvrir sa fiche complète.</p>
+        <h1 className="font-display mt-2 text-4xl font-extrabold sm:text-6xl">Neuf saveurs, zéro compromis.</h1>
+        <p className="mt-4 max-w-xl text-lg text-ink/70">
+          Toutes nos canettes font 33 cl, sont bio et contiennent entre 3 et 7 g de sucre pour 100 ml. Ouvre une fiche
+          pour voir les ingrédients et nos idées d&apos;accords.
+        </p>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {flavors.map((f) => (
+        <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label="Filtrer les saveurs">
+          {[{ id: "toutes" as const, label: "Toutes" }, ...families].map((fam) => {
+            const active = filter === fam.id;
+            const n = fam.id === "toutes" ? flavors.length : flavors.filter((f) => f.family === fam.id).length;
+            return (
+              <button
+                key={fam.id}
+                onClick={() => setFilter(fam.id)}
+                aria-pressed={active}
+                className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+                  active ? "bg-ink text-cream" : "bg-white text-ink ring-1 ring-ink/10 hover:ring-ink/40"
+                }`}
+              >
+                {fam.label} <span className={active ? "text-cream/60" : "text-ink/40"}>{n}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {shown.map((f) => (
             <article
               key={f.id}
               className="group flex flex-col rounded-3xl p-6 transition hover:-translate-y-1"
@@ -69,21 +93,41 @@ export default function Shop() {
                 />
               </button>
               <div className="mt-6 flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-2xl font-bold">{f.name}</h3>
+                <h2 className="font-display text-2xl font-bold">{f.name}</h2>
                 <span className="font-semibold">{formatPrice(f.price)}</span>
               </div>
-              <p className="text-sm font-medium text-ink/60">{f.tagline} · {f.kcal} kcal</p>
+              <p className="text-sm font-medium text-ink/60">{f.tagline}</p>
               <p className="mt-3 flex-1 text-ink/80">{f.description}</p>
-              <button
-                onClick={() => change(f.id, 1)}
-                className="mt-6 rounded-full py-3 font-semibold transition hover:opacity-90 active:scale-95"
-                style={{ backgroundColor: f.color, color: f.accent }}
-              >
-                {cart[f.id] ? `Ajouter (${cart[f.id]} au panier)` : "Ajouter au panier"}
-              </button>
+
+              <div className="mt-5" aria-label={`${f.sugar} g de sucre pour 100 ml`}>
+                <div className="flex justify-between text-xs font-semibold text-ink/60">
+                  <span>Sucre</span>
+                  <span>{f.sugar} g / 100 ml · {f.kcal} kcal</span>
+                </div>
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-ink/10">
+                  <div className="h-full rounded-full" style={{ width: `${(f.sugar / 10) * 100}%`, backgroundColor: f.color }} />
+                </div>
+              </div>
+
+              <div className="mt-6 flex gap-3">
+                <button
+                  onClick={() => setSelected(f)}
+                  className="rounded-full px-5 py-3 font-semibold ring-1 ring-ink/15 transition hover:ring-ink/50"
+                >
+                  Fiche
+                </button>
+                <button
+                  onClick={() => change(f.id, 1)}
+                  className="flex-1 rounded-full py-3 font-semibold transition hover:opacity-90 active:scale-95"
+                  style={{ backgroundColor: f.color, color: f.accent }}
+                >
+                  {cart[f.id] ? `Ajouter (${cart[f.id]} au panier)` : "Ajouter au panier"}
+                </button>
+              </div>
             </article>
           ))}
         </div>
+        <p className="mt-8 text-sm text-ink/50">La barre de sucre est comparée à un soda classique (environ 10 g / 100 ml).</p>
       </section>
 
       {selected && (
