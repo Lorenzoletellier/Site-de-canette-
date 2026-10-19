@@ -178,7 +178,7 @@ export default function Can({ name, color, accent, secondary, pattern, className
           <feGaussianBlur stdDeviation="3" />
         </filter>
         <clipPath id={`clip-${id}`}>
-          <path d="M14 30 L106 30 L106 196 A46 7 0 0 1 14 196 Z" />
+          <path d="M14 38 L106 38 L106 196 A46 7 0 0 1 14 196 Z" />
         </clipPath>
       </defs>
 
