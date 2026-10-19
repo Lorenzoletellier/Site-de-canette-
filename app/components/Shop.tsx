@@ -65,6 +65,8 @@ export default function Shop() {
                   name={f.name}
                   color={f.color}
                   accent={f.accent}
+                  secondary={f.secondary}
+                  pattern={f.pattern}
                   className="h-full drop-shadow-xl transition duration-500 group-hover:-rotate-6 group-hover:scale-105"
                 />
               </button>
@@ -115,7 +117,7 @@ export default function Shop() {
               <ul className="mt-6 flex-1 space-y-4 overflow-y-auto">
                 {items.map((i) => (
                   <li key={i.id} className="flex items-center gap-4 rounded-2xl bg-white/70 p-3">
-                    <Can name={i.name} color={i.color} accent={i.accent} className="h-16 shrink-0" />
+                    <Can {...i} className="h-16 shrink-0" />
                     <div className="flex-1">
                       <p className="font-semibold">{i.name}</p>
                       <p className="text-sm text-ink/60">{formatPrice(i.price)}</p>
