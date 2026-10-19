@@ -1,5 +1,7 @@
 import Can from "./components/Can";
-import Shop from "./components/Shop";
+import Link from "next/link";
+import SiteFooter from "./components/SiteFooter";
+import SiteHeader from "./components/SiteHeader";
 import { flavors } from "./data";
 
 const [lemon, raspberry, peach] = flavors;
@@ -9,14 +11,7 @@ export default function Home() {
     <main className="flex-1">
       {/* Hero */}
       <section className="relative overflow-hidden bg-sun">
-        <nav className="mx-auto flex max-w-6xl items-center px-4 py-6 sm:px-6">
-          <span className="font-display text-2xl font-extrabold tracking-tight">PÉTILLE</span>
-          <div className="ml-10 hidden gap-8 text-sm font-semibold sm:flex">
-            <a href="#saveurs" className="hover:underline">Saveurs</a>
-            <a href="#histoire" className="hover:underline">Notre histoire</a>
-            <a href="#contact" className="hover:underline">Contact</a>
-          </div>
-        </nav>
+        <SiteHeader />
 
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 pt-8 pb-24 sm:px-6 md:grid-cols-2">
           <div>
@@ -31,12 +26,12 @@ export default function Home() {
               <em> pschitt</em>, savoure.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <a href="#saveurs" className="rounded-full bg-ink px-7 py-4 font-semibold text-cream transition hover:scale-105">
+              <Link href="/saveurs" className="rounded-full bg-ink px-7 py-4 font-semibold text-cream transition hover:scale-105">
                 Découvrir les saveurs
-              </a>
-              <a href="#histoire" className="rounded-full border-2 border-ink px-7 py-4 font-semibold transition hover:bg-ink hover:text-cream">
+              </Link>
+              <Link href="/notre-histoire" className="rounded-full border-2 border-ink px-7 py-4 font-semibold transition hover:bg-ink hover:text-cream">
                 Notre histoire
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -59,49 +54,29 @@ export default function Home() {
         </div>
       </section>
 
-      <Shop />
-
-      {/* Histoire */}
-      <section id="histoire" className="bg-ink text-cream">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-24 sm:px-6 md:grid-cols-3">
-          <div className="md:col-span-1">
-            <p className="text-sm font-semibold tracking-[0.2em] text-cream/60 uppercase">Notre histoire</p>
-            <h2 className="font-display mt-2 text-4xl font-extrabold">Né dans une cuisine, pas dans un labo.</h2>
-          </div>
+      {/* Accès rapides */}
+      <section className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+        <div className="grid gap-6 md:grid-cols-3">
           {[
-            ["4 g", "de sucre pour 100 ml, en moyenne. Deux fois moins qu'un soda classique."],
-            ["100 %", "des fruits issus de l'agriculture biologique et de producteurs partenaires."],
-            ["∞", "L'aluminium de nos canettes se recycle à l'infini. Trie-la, elle reviendra."],
-          ].map(([stat, text]) => (
-            <div key={stat} className="border-t border-cream/20 pt-6 md:col-start-auto">
-              <p className="font-display text-6xl font-extrabold text-sun">{stat}</p>
-              <p className="mt-4 text-cream/80">{text}</p>
-            </div>
+            { href: "/saveurs", kicker: "La gamme", title: "Neuf saveurs", text: "Découvre toutes nos canettes et compose ton panier." },
+            { href: "/notre-histoire", kicker: "Depuis 2019", title: "Notre histoire", text: "D'une simple cuisine à neuf recettes : l'aventure Pétille." },
+            { href: "/contact", kicker: "On t'écoute", title: "Contact", text: "Une question, un événement, une envie ? Écris-nous." },
+          ].map((c) => (
+            <Link
+              key={c.href}
+              href={c.href}
+              className="group rounded-3xl border-2 border-ink/10 p-8 transition hover:-translate-y-1 hover:border-ink"
+            >
+              <p className="text-xs font-semibold tracking-[0.2em] text-ink/50 uppercase">{c.kicker}</p>
+              <h2 className="font-display mt-3 text-3xl font-extrabold">{c.title}</h2>
+              <p className="mt-3 text-ink/70">{c.text}</p>
+              <span className="mt-6 inline-block font-semibold group-hover:underline">Y aller →</span>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Contact / newsletter */}
-      <section id="contact" className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <h2 className="font-display text-4xl font-extrabold sm:text-5xl">Reste dans la bulle.</h2>
-        <p className="mt-4 text-ink/70">Nouvelles saveurs, éditions limitées et offres en avant-première.</p>
-        <form className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row" action="#">
-          <input
-            type="email"
-            required
-            placeholder="ton@email.fr"
-            className="flex-1 rounded-full border-2 border-ink/20 bg-white px-5 py-3 outline-none focus:border-ink"
-          />
-          <button className="rounded-full bg-ink px-6 py-3 font-semibold text-cream">S&apos;inscrire</button>
-        </form>
-      </section>
-
-      <footer className="border-t border-ink/10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-8 text-sm text-ink/60 sm:flex-row sm:px-6">
-          <span className="font-display font-bold text-ink">PÉTILLE</span>
-          <span>© 2026 Pétille — L&apos;abus de bulles n&apos;est pas dangereux.</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
