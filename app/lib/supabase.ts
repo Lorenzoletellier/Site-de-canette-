@@ -1,0 +1,14 @@
+import { createClient } from "@supabase/supabase-js";
+
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+// Client Supabase côté navigateur (clé publishable, faite pour être utilisée côté client).
+// null si .env.local n'est pas rempli : le site continue de marcher, sans les messages.
+export const supabase = url && key ? createClient(url, key) : null;
+
+export type News = {
+  id: number;
+  created_at: string;
+  contenue: string | null;
+};

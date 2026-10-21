@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Can from "./components/Can";
+import Messages from "./components/Messages";
 import { ArrowIcon, DropIcon, LeafIcon, RecycleIcon } from "./components/Icons";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
@@ -154,6 +155,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Messages />
 
       {/* Contact */}
       <section className="mx-auto max-w-3xl px-4 pb-24 text-center sm:px-6">
